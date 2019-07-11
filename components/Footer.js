@@ -56,8 +56,9 @@ class Footer extends Component {
                         </div>
                     </div>
                 </div>
-                <style jsx global>{`
+                <style jsx>{`
                     .footer {
+                        color : #fff;
                         background-color : #222;
                         padding : 14px 0;
                     }

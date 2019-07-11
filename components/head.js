@@ -33,7 +33,7 @@ const Head = props => (
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic%7CRoboto+Mono:400%7CGoogle+Sans:400' rel='stylesheet'/>
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'/>
+    {/* <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'/> */}
   </NextHead>
 )
 

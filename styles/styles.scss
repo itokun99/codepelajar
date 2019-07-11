@@ -1,5 +1,5 @@
 // variabel
-$color_bg : #f5f8fb;
+$color_bg : #fff;
 $color_base : #2ecc71;
 $color_secondary : #888;
 $color_text : #222;
@@ -17,7 +17,8 @@ body {
     margin : 0;
     padding : 0;
     background-color:  $color_bg;
-    font-family : $font_subtitle;
+    font-family : $font_title;
+    letter-spacing: .5px;
 }
 
 a {
