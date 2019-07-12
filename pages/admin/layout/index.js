@@ -1,22 +1,21 @@
-import AdminLayout from "../../components/admin/AdminLayout";
-import Router from 'next/router';
+import AdminLayout from "../../../components/admin/AdminLayout";
+import Router  from 'next/router';
 import nextCookie from 'next-cookies';
 
-const Statistic = (props) => {
+const Main = (props) => {
     return(
         <div>
             <AdminLayout
-                pageTitle="Statistic - Code Pelajar"
-                pageDescription = "Statistic - Code Pelajar"
+                pageTitle="Layout - Code Pelajar"
+                pageDescription = "Layout - Code Pelajar"
             >
-                <div>Statistic</div>
+                <div>Layout</div>
             </AdminLayout>
         </div>
     )
 }
 
-
-Statistic.getInitialProps = async (ctx) => {
+Main.getInitialProps = async (ctx) => {
     let cookies = nextCookie(ctx);
     let cp_token = cookies.cp_token;
     let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : null;
@@ -38,4 +37,5 @@ Statistic.getInitialProps = async (ctx) => {
         cp_user : cp_user
     };
 }
-export default Statistic;
+
+export default Main;

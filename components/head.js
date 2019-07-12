@@ -1,7 +1,9 @@
 import React from 'react'
 import NextHead from 'next/head'
 import { string } from 'prop-types'
+import '../styles/react-table.scss';
 import '../styles/styles.scss';
+
 
 const defaultDescription = ''
 const defaultOGURL = ''

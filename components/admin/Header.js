@@ -31,6 +31,7 @@ class Header extends Component {
                         border-bottom : 1px solid #ddd;
                         justify-content : space-between;
                         padding : 0 14px;
+                        z-index : 2;
                     }
                     .title { 
                         font-size : 24px;

@@ -1,0 +1,103 @@
+import AdminLayout, { SectionLayout } from "../../../components/admin/AdminLayout";
+import nextCookie from 'next-cookies';
+import Router from 'next/router';
+import Button from "../../../components/Button";
+import ReactTable from 'react-table';
+let data = [
+    {
+        title : "Code Pelajar  : Postingan",
+        label : "HTML",
+        content : "dawadadwa adwadada adawdadawd adwada"
+    },
+    {
+        title : "Code Pelajar  : Postingan",
+        label : "HTML",
+        content : "dawadadwa adwadada adawdadawd adwada"
+    },
+    {
+        title : "Code Pelajar  : Postingan",
+        label : "HTML",
+        content : "dawadadwa adwadada adawdadawd adwada"
+    },
+    {
+        title : "Code Pelajar  : Postingan",
+        label : "HTML",
+        content : "dawadadwa adwadada adawdadawd adwada"
+    }
+]
+
+let columns = [
+    {
+        Header : "NO",
+        Cell : (row) => {
+            console.log(row)
+            return (
+                <span>{row.index + 1}</span>
+            )
+        }
+        
+    },
+    {
+        Header : "Post Title",
+        accessor : "title"
+    },
+    {
+        Header : "Label",
+        accessor : "label"
+    },
+    {
+        Header : "Content",
+        accessor : "content"
+    },
+]
+
+const Main = (props) => {
+    return(
+        <div>
+            <AdminLayout
+                pageTitle="Articles - Code Pelajar"
+                pageDescription = "Articles - Code Pelajar"
+            >
+                <SectionLayout title="Articles">
+                    <Button
+                        href = "#"
+                        link = {true} 
+                        size = "small"
+                        title="Add Post"
+                    />
+                    <div className="wrapper">
+                        <ReactTable
+                            columns = {columns}
+                            data = {data}
+                        />
+                    </div>
+                </SectionLayout>
+            </AdminLayout>
+        </div>
+    )
+}
+
+Main.getInitialProps = async (ctx) => {
+    let cookies = nextCookie(ctx);
+    let cp_token = cookies.cp_token;
+    let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : {};
+
+    if(ctx.req && !cp_token){
+        ctx.res.writeHead(302, {
+            Location : '/admin/login'
+        })
+        ctx.res.end();
+        return
+    }
+
+    if(!cp_token){
+        Router.push('/admin/login');
+    }
+    
+    return {
+        cp_token : cp_token,
+        cp_user : cp_user
+    };
+}
+
+export default Main;

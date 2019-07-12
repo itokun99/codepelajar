@@ -1,25 +1,26 @@
-import AdminLayout from "../../components/admin/AdminLayout";
-import nextCookie from 'next-cookies';
+import AdminLayout from "../../../components/admin/AdminLayout";
 import Router from 'next/router';
+import nextCookie from 'next-cookies';
 
 
-const Article = (props) => {
+const Comments = (props) => {
     return(
         <div>
             <AdminLayout
-                pageTitle="Articles - Code Pelajar"
-                pageDescription = "Articles - Code Pelajar"
+                pageTitle="Comments - Code Pelajar"
+                pageDescription = "Comments - Code Pelajar"
             >
-                <div>Post</div>
+                <div>Comments</div>
             </AdminLayout>
         </div>
     )
 }
 
-Article.getInitialProps = async (ctx) => {
+
+Comments.getInitialProps = async (ctx) => {
     let cookies = nextCookie(ctx);
     let cp_token = cookies.cp_token;
-    let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : {};
+    let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : null;
 
     if(ctx.req && !cp_token){
         ctx.res.writeHead(302, {
@@ -39,4 +40,4 @@ Article.getInitialProps = async (ctx) => {
     };
 }
 
-export default Article;
+export default Comments;

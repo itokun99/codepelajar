@@ -1,4 +1,4 @@
-import AdminLayout from "../../components/admin/AdminLayout";
+import AdminLayout from "../../../components/admin/AdminLayout";
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 
