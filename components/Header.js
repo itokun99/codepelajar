@@ -83,7 +83,7 @@ class Header extends Component {
                 <div className="header-container">
                     <div className="header-row">
                         <div className="header-left">
-                            <Brand title="Code Pelajar" />
+                            <Brand title={this.props.siteTitle} />
                         </div>
                         <div className="header-right">
                             <HeaderNav />

@@ -15,7 +15,9 @@ const WebLayout = (props) => {
                 url = {props.pageUrl}
                 ogImage = {props.pageThumbnail}
             />
-            <Header />
+            <Header 
+                siteTitle = {props.siteTitle}
+            />
             <div className="content-main">
                 {props.children}
             </div>
@@ -26,6 +28,7 @@ const WebLayout = (props) => {
 
 WebLayout.propTypes = {
     pageTitle: string,
+    siteTitle: string,
     pageDescription: string,
     pageUrl: string,
     pageThumbnail: string

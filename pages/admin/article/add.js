@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import AdminLayout, { SectionLayout } from "../../../components/admin/AdminLayout";
 import nextCookie from 'next-cookies';
 import Router from 'next/router';
-import SkeletonLoader from '../../../components/admin/SkeletonLoader';
 
 class Main extends Component {
     constructor(props){
         super(props);
         this.state = {
             skelLoader : true,
-            loadingBar : 20
         }
     }
 
     render(){
         return(
             <AdminLayout
-                pageTitle="Dashboard - Code Pelajar"
-                pageDescription = "Dashboard - Code Pelajar"
+                pageTitle="Add Article - Code Pelajar"
+                pageDescription = "Add Article - Code Pelajar"
             >
-                <SectionLayout title="Dashboard">
+                <SectionLayout title="Add Article">
+
                 </SectionLayout>
             </AdminLayout>
         )   

@@ -30,7 +30,6 @@ let columns = [
     {
         Header : "NO",
         Cell : (row) => {
-            console.log(row)
             return (
                 <span>{row.index + 1}</span>
             )

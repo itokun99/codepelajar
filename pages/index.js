@@ -3,6 +3,7 @@ import WebLayout, {
     Section,
     Container
 } from '../components/WebLayout';
+import axios from 'axios';
 
 const FreshUpdate = (props) => {
     let thumb = 'https://2.bp.blogspot.com/-XayP7EPTkPI/XAhT8IkLllI/AAAAAAAAAuk/nQFH4etiWSwIMuHI2Fd1yTxwJ3vFbFBcQCLcBGAs/s640/Lamp%2Bgrid.png';
@@ -249,11 +250,13 @@ const ArticleStack = (props) => {
     )
 }
 
-const Home = () => {
+const Home = (props) => {
+    console.log(props)
     let dummy = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a pellentesque sapien, a scelerisque justo. Nam vitae urna pellentesque, tincidunt justo at, porta neque. Fusce auctor lobortis sem, ut dignissim mi dapibus ac. Curabitur tincidunt, tortor sed tempus imperdiet, ipsum ipsum dapibus leo, id fermentum purus enim id libero. Suspendisse cursus nulla ut sodales imperdiet.';
     return(
         <WebLayout
-            pageTitle = "Code Pelajar - Homepage"
+            siteTitle = {props.site_title}
+            pageTitle = {props.site_title}
             pageDescription = "Website Portofolio"
             pageUrl = "https://www.codepelajar.com"
         >
@@ -270,6 +273,19 @@ const Home = () => {
             <ArticleStack />
         </WebLayout>
     )
+}
+
+Home.getInitialProps = async (context) => {
+    var data = {}
+    await axios.get("http://localhost:8000/api/settings")
+    .then((response) => {
+        if(response.status === 200){
+            data = response.data.data
+        }
+    })
+    return {
+        ...data         
+    }
 }
 
 export default Home
