@@ -1,0 +1,35 @@
+// variabel
+$color_bg : #fff;
+$color_base : #2ecc71;
+$color_secondary : #888;
+$color_text : #222;
+$color_link : #4834d4;
+$font_default : "Roboto" , sans-serif;
+$font_title : "Google Sans" , sans-serif;
+$font_subtitle : "Lato" , sans-serif;
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin : 0;
+    padding : 0;
+    background-color:  $color_bg;
+    font-family : $font_title;
+    letter-spacing: .5px;
+}
+
+a {
+    text-decoration: none;
+    color : $color_link;
+    transition : .3s;
+}
+
+.text-center {
+    text-align: center;  
+}
+
+//import
+@import './cheatsheets/_react-table';

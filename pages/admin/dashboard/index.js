@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import AdminLayout, { SectionLayout } from "../../../components/admin/AdminLayout";
+import { AdminSection as SectionLayout } from '../../../components'
+import { AdminLayout } from "../../../containers/templates";
 import nextCookie from 'next-cookies';
 import Router from 'next/router';
-import SkeletonLoader from '../../../components/admin/SkeletonLoader';
 
 class Main extends Component {
     constructor(props){
@@ -28,10 +28,10 @@ class Main extends Component {
 
 Main.getInitialProps = async (ctx) => {
     let cookies = nextCookie(ctx);
-    let cp_token = cookies.cp_token;
-    let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : {};
+    let token = cookies.CPA;
+    let user = typeof(token) !== "undefined" ? JSON.parse(cookies.user_data) : {};
 
-    if(ctx.req && !cp_token){
+    if(ctx.req && !token){
         ctx.res.writeHead(302, {
             Location : '/admin/login'
         })
@@ -39,13 +39,13 @@ Main.getInitialProps = async (ctx) => {
         return
     }
 
-    if(!cp_token){
+    if(!token){
         Router.push('/admin/login');
     }
     
     return {
-        cp_token : cp_token,
-        cp_user : cp_user
+        token,
+        user,
     };
 }
 
