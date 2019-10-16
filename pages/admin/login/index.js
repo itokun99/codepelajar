@@ -28,9 +28,9 @@ class Login extends Component {
 
     static getInitialProps = async (ctx) => {
         let cookies = nextCookie(ctx);
-        let cp_token = cookies.cp_token;
+        let token = cookies.CPA;
     
-        if(ctx.req && cp_token){
+        if(ctx.req && token){
             ctx.res.writeHead(302, {
                 Location : '/admin/dashboard'
             })
@@ -38,7 +38,7 @@ class Login extends Component {
             return
         }
         
-        if(cp_token){
+        if(token){
             Router.push('/admin/dashboard');
         }
         return {};

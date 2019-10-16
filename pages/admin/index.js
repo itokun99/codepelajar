@@ -5,7 +5,7 @@ import nextCookie from 'next-cookies';
 class Main extends Component {
     render(){
         return (
-            <></>
+            <div>Redirected!</div>
         );
     }
 }
@@ -13,10 +13,9 @@ class Main extends Component {
 
 Main.getInitialProps = async (ctx) => {
     let cookies = nextCookie(ctx);
-    let cp_token = cookies.cp_token;
-    // let cp_user = JSON.parse(cookies.cp_user);
+    let token = cookies.CPA;
 
-    if(ctx.req && !cp_token){
+    if(ctx.req && !token){
 
         ctx.res.writeHead(302, {
             Location : '/admin/login'
@@ -30,14 +29,6 @@ Main.getInitialProps = async (ctx) => {
         ctx.res.end();
         return
     }
-
-    if(!cp_token){
-        Router.push('/admin/login');
-    } else {
-        Router.push('/admin/dashboard');        
-    }
-
-    return cp_token;
 }
 
 export default Main;

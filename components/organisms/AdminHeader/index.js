@@ -4,8 +4,8 @@ import Router from 'next/router';
 
 class Header extends Component {
     logout = () => {
-        jsCookie.remove('cp_token');
-        jsCookie.remove('cp_user');
+        jsCookie.remove('CPA');
+        jsCookie.remove('user_data');
         Router.push('/admin/login');
     }
     render(){

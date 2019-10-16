@@ -1,4 +1,5 @@
 export const METRICS = {
+  containerWidth: '1200px',
   gutters: {
     string : {
       xxs: '2px',
@@ -12,7 +13,7 @@ export const METRICS = {
       xxxl: '48px',
       xxxxl: '56px',
     },
-    number : {
+    number: {
       xxs: 2,
       xs: 4,
       s: 6,

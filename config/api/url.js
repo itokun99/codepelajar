@@ -16,6 +16,7 @@ export const config = development;
 
 const baseUrl = {
   auth: `${config.url.api}/auth`,
+  codepelajar: `${config.url.api}/codepelajar`
 };
 
 export default baseUrl;

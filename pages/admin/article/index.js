@@ -1,5 +1,3 @@
-import nextCookie from 'next-cookies';
-import Router from 'next/router';
 import { AdminLayout } from '../../../containers/templates'
 import { Button, AdminSection as SectionLayout } from '../../../components'
 import ReactTable from 'react-table';
@@ -79,27 +77,6 @@ const Main = (props) => {
 }
 
 Main.getInitialProps = async (ctx) => {
-    // let cookies = nextCookie(ctx);
-    // let cp_token = cookies.cp_token;
-    // let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : {};
-
-    // if(ctx.req && !cp_token){
-    //     ctx.res.writeHead(302, {
-    //         Location : '/admin/login'
-    //     })
-    //     ctx.res.end();
-    //     return
-    // }
-
-    // if(!cp_token){
-    //     Router.push('/admin/login');
-    // }
-    
-    
-    // return {
-    //     cp_token : cp_token,
-    //     cp_user : cp_user
-    // };
     const cookie_data = getCookiesFromContext(ctx);
 
     return {

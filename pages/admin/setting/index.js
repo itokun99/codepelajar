@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import AdminLayout, { SectionLayout } from "../../../components/admin/AdminLayout";
-import Router from 'next/router';
-import nextCookie from 'next-cookies';
-import Button from '../../../components/Button';
+import { AdminLayout } from '../../../containers/templates'
+import { Button, AdminSection as SectionLayout } from '../../../components';
 import { Icon } from 'react-icons-kit';
-import { plus } from 'react-icons-kit/fa/plus'
+import { plus } from 'react-icons-kit/fa/plus';
+import { getCookiesFromContext, COLOR } from '../../../utils';
+import { API } from '../../../config';
+import _ from 'lodash';
 
 const dummy = {
     siteTitle : "Code Pelajar",
@@ -14,61 +15,91 @@ const dummy = {
 class Main extends Component {
     constructor(props){
         super(props);
+        let { codepelajar } = this.props;
         this.state = {
+            initState: codepelajar,
+            setting: codepelajar,
             editMode : ""
         }
     }
 
     openEdit = (value) => {
-        this.setState({
-            editMode : value
-        })
+        this.setState({ editMode : value })
+    }
+    closeEdit = () => {
+        const { setting, initState } = this.state;
+        console.log(setting, initState)
+        let match = true;
+        for(let key in setting){
+            if(setting[key] !== initState[key]){
+                match = false;
+            }
+        }
+        if(match){
+            this.setState({ editMode : "" })
+        } else {
+            let conf = confirm('Save change?');
+            if(conf){
+                alert('Saved!')
+                this.setState({ editMode : "" })
+            } else {
+                alert('Cancel!')
+                this.setState({ editMode : "" })
+            }
+        }
     }
 
-    closeEdit = () => {
+    updateSetting = () => {
+        const { setting } = this.state;
+    }
+
+    _handleChangeText = (value, name) => {
+        const { setting } = this.state;
+        setting[name] = value;
         this.setState({
-            editMode : ""
-        })
+            setting: setting
+        }, () => console.log(this.state.initState))
     }
 
     render(){
+        const { editMode, setting } = this.state
+        console.log(this.state, this.props)
         return(
             <div>
                 <AdminLayout
                     pageTitle="Setting - Code Pelajar"
                     pageDescription = "Setting - Code Pelajar"
-                >   
+                >
                     <SectionLayout title="Setting">
                         {
-                            this.state.editMode === "SITE_TITLE" ?
+                            editMode === "SITE_TITLE" ?
                             <div className="form-group">
                                 <label className="form-label">Site Title</label>
                                 <div className="form-input">
-                                    <input type="text" placeholder="Code Pelajar" value={dummy.siteTitle} />
+                                    <input type="text" placeholder="Site title" onChange={e => this._handleChangeText(e.target.value, 'site_title')} defaultValue={setting.site_title} />
                                     <div className="action-wrapper">
-                                        <Button  size =  "small" link = {false} variant = "default" title = "Save Changes" style = {{marginRight : 5}} />
+                                        <Button  size =  "small" link = {false} variant = "success" title = "Save Changes" style = {{marginRight : 5}} />
                                         <Button onClick={this.closeEdit}  size =  "small" link = {false} variant = "secondary" title = "Cancel" style = {{marginRight : 5}} />
                                     </div>
                                 </div>
-
                             </div>
                             :
                             <div className="form-group">
                                 <label className="form-label">Site Title</label>
                                 <div className="form-input">
-                                    <span className="form-value"><strong>{dummy.siteTitle}</strong></span>
+                                    <span className="form-value"><strong>{setting.site_title}</strong></span>
                                 </div>
                                 <span onClick={() => this.openEdit('SITE_TITLE')} className="edit-button">Edit</span>
                             </div>
                         }
                         {
-                            this.state.editMode === "SITE_DESCRIPTION" ?
+                            editMode === "SITE_DESCRIPTION" ?
                             <div className="form-group">
                                 <label className="form-label">Site Description</label>
                                 <div className="form-input">
-                                    <textarea rows={5} defaultValue={dummy.siteDescription}></textarea>
+                                    <textarea onChange={e => this._handleChangeText(e.target.value, 'site_description')} rows={5} defaultValue={setting.site_description}></textarea>
                                     <div className="action-wrapper">
-                                        <Button  size =  "small" link = {false} variant = "default" title = "Save Changes" style = {{marginRight : 5}} />
+                                        <Button  size =  "small" link = {false} variant = "success" title = "Save Changes" style = {{marginRight : 5}} />
                                         <Button onClick={this.closeEdit}  size =  "small" link = {false} variant = "secondary" title = "Cancel" style = {{marginRight : 5}} />
                                     </div>
                                 </div>
@@ -77,13 +108,13 @@ class Main extends Component {
                             <div className="form-group">
                                 <label className="form-label">Site Description</label>
                                 <div className="form-input">
-                                    <span className="form-value">{dummy.siteDescription}</span>
+                                    <span className="form-value">{setting.site_description}</span>
                                 </div>
                                 <span onClick={() => this.openEdit("SITE_DESCRIPTION")} className="edit-button">Edit</span>
                             </div>
                         }
                         {
-                            this.state.editMode === "ADMIN" ?
+                            editMode === "ADMIN" ?
                             <div className="form-group">
                                 <label className="form-label">New Admin</label>
                                 <div className="form-input">
@@ -108,7 +139,7 @@ class Main extends Component {
                                         <input type="password" placeholder="******" />
                                     </div>
                                     <div className="action-wrapper">
-                                        <Button  size =  "small" link = {false} variant = "default" title = "Save Changes" style = {{marginRight : 5}} />
+                                        <Button  size =  "small" link = {false} variant = "success" title = "Save Changes" style = {{marginRight : 5}} />
                                         <Button onClick={this.closeEdit}  size =  "small" link = {false} variant = "secondary" title = "Cancel" style = {{marginRight : 5}} />
                                     </div>
                                 </div>
@@ -147,14 +178,14 @@ class Main extends Component {
                             right : 14px;
                             padding : 4px 8px;
                             font-size : 14px;
-                            color : #fff;
+                            color : ${COLOR.light100};
                             border-radius : 4px;
-                            background-color : #ff3f34;
+                            background-color : ${COLOR.red100};
                             cursor : pointer;
                             z-index  : 1
                         }
                         .form-group:hover {
-                            background-color : #eee;
+                            background-color : ${COLOR.grey25};
                         }
                         .form-group:hover .edit-button {
                             display : inline-block;
@@ -183,17 +214,17 @@ class Main extends Component {
                         }
                         input[type="text"], input[type="email"], input[type="password"], textarea {
                             width :100%;
-                            border : 1.5px solid rgba(0,0,0,0.2);
+                            border : 1.5px solid ${COLOR.dark25};
                             padding : 8px 8px;
                             border-radius : 8px;
-                            color : #444;
+                            color : ${COLOR.dark100};
                             font-family: "Google Sans", sans-serif;
                             font-size : 16px;
                             outline : none;
                             transition : .3s ease;
                         }
                         input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
-                            border-color : rgba(0,0,0,0.5)
+                            border-color : ${COLOR.dark75}
                         }
                         .list-admin {
                             padding :0;
@@ -202,7 +233,7 @@ class Main extends Component {
                         }
                         .list-admin li:not(:last-child) {
                             padding : 8px 14px;
-                            background-color : #ddd;
+                            background-color : ${COLOR.red100};
                             margin-bottom : 8px;
                         }
     
@@ -214,29 +245,16 @@ class Main extends Component {
 }
 
 Main.getInitialProps = async (ctx) => {
-    let cookies = nextCookie(ctx);
-    let cp_token = cookies.cp_token;
-    let cp_user = typeof(cp_token) !== "undefined" ? JSON.parse(cookies.cp_user) : null;
-
-    if(ctx.req && !cp_token){
-        ctx.res.writeHead(302, {
-            Location : '/admin/login'
-        })
-        ctx.res.end();
-        return
-    }
-
-    if(!cp_token){
-        Router.push('/admin/login');
-    }
-    
+    const cookie_data = getCookiesFromContext(ctx);
+    const response = await API.codepelajar();
+    const codepelajar = response.data;
     return {
-        cp_token : cp_token,
-        cp_user : cp_user,
+        cookie_data,
         setting : {
             siteTitle : dummy.siteTitle,
             siteDescription : dummy.siteDescription,
-        }
+        },
+        codepelajar
     };
 }
 

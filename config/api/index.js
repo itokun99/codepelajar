@@ -4,7 +4,8 @@ import baseUrl, { config } from './url';
 
 
 const API = {
-  login: ApiRequest.post(baseUrl.auth)
+  login: ApiRequest.post(baseUrl.auth),
+  codepelajar: ApiRequest.get(baseUrl.codepelajar)
 }
 
 
