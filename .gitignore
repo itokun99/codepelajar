@@ -1,19 +1,78 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/backend/node_modules
+/backend/.pnp
+/backend/.pnp.js
+
+# testing
+/backend/coverage
+
+# next.js
+/backend/.next/
+/backend/out/
+
+# production
+/backend/build
+
+# misc
+/backend/.DS_Store
+/backend/.env*
+/backend/yarn.lock
+
+
+# debug
+/backend/npm-debug.log*
+/backend/yarn-debug.log*
+/backend/yarn-error.log*
+
+# dependencies
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
+
+# testing
+/frontend/coverage
+
+# next.js
+/frontend/.next/
+/frontend/out/
+
+# production
+/frontend/build
+
+# misc
+/frontend/.DS_Store
+/frontend/.env*
+/frontend/yarn.lock
+
+# debug
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+
 /node_modules
+/.pnp
+.pnp.js
 
 # testing
 /coverage
 
+# next.js
+/.next/
+/out/
+
 # production
 /build
-/dist
-/.next
 
 # misc
 .DS_Store
-.env
+.env*
+yarn.lock
+
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "codepelajar_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "port": "8889"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "codepelajar_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "port": "8889"
+  },
+  "production": {
+    "username": "root",
+    "password": "",
+    "database": "codepelajar_master",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": "8889",
+    "operatorsAliases": false
+  }
+}
